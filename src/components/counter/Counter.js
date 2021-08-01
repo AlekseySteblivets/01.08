@@ -1,6 +1,11 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
+
 
 const Counter = ({ value, setValue, name }) => {
+
+  // const test = useMemo(() => value, [value]);
+  // console.log("TEST :", test);
+
   const simpleClick = key => {
     if (key === 'increment') {
       return setValue(value + 1);
