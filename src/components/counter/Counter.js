@@ -1,23 +1,29 @@
+import { memo } from 'react';
 
-const Counter = ({ value, setValue }) => {
+const Counter = ({ value, setValue, name }) => {
+  const simpleClick = key => {
+    if (key === 'increment') {
+      return setValue(value + 1);
+    }
+    return setValue(value - 1);
+  };
+  console.log(name);
 
-    const simpleClick = (key) => {
-        if (key === 'increment') {
-            return setValue(prevValue => prevValue + 1);
-        }
-        return setValue(prevValue => prevValue - 1);
-    };
-
-
-
-    return (
-        <div>
-            <span>{value}</span>
-            <button onClick={() => simpleClick('increment')}>Подсчет+</button>
-            <button onClick={() => simpleClick('decrement')}>Подсчет-</button>
-
-        </div>
-    );
+  return (
+    <div>
+      <span>{value}</span>
+      <button onClick={() => simpleClick('increment')}>Подсчет+</button>
+      <button onClick={() => simpleClick('decrement')}>Подсчет-</button>
+    </div>
+  );
 };
 
-export default Counter;
+const areEqual = (prevProps, nextProps) => {
+  if (prevProps.value === nextProps.value) {
+    return true;
+  }
+
+  return false;
+};
+
+export default memo(Counter, areEqual);
